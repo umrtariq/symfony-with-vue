@@ -15,7 +15,8 @@
 {#                    </div>#}
                     <ul class="list-group">
                         <li v-for="result in results" :key="result.id" class="list-group-item">
-                            ${ result.name }
+                            <h5>${ result._source.name }</h5>
+                            <p>${ result._source.description }</p>
                         </li>
                     </ul>
                     <button v-if="results.length && results.length % 5 === 0" @click="loadMore" class="btn btn-primary mt-3">Load More</button>

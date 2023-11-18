@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Helper\OpenSearchClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -9,6 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SearchController extends AbstractController
 {
+    private $openSearchClient;
+
+    public function __construct(OpenSearchClient $openSearchClient)
+    {
+        $this->openSearchClient = $openSearchClient;
+    }
+
     /**
      * @Route("/", name="home")
      */
@@ -29,7 +37,7 @@ class SearchController extends AbstractController
             return new JsonResponse([]);
         }
 
-        $results = $this->performOpenSearch($query, $page);
+        $results = $this->openSearchClient->search($query, $page);
 
         return new JsonResponse($results);
     }
