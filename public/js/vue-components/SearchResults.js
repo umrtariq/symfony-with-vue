@@ -4,18 +4,22 @@ new Vue({
     data: {
         query: '',
         results: [],
-        page: 1
+        page: 1,
+        loading: false
     },
     methods: {
         search() {
             // Reset page to 1 when performing a new search
             this.page = 1;
+            // loader
+            this.loading = true;
 
             if (this.query.length >= 2) {
                 this.fetchResults(this.query);
             } else {
                 // Clear results if there are fewer than two characters
                 this.results = [];
+                this.loading = false;
             }
         },
         fetchResults(keywords, append = false) {
@@ -26,6 +30,10 @@ new Vue({
                 })
                 .catch(error => {
                     console.error('Error fetching results:', error);
+                })
+                .finally(() => {
+                    // Turn off the loading state after the API request completes (success or failure)
+                    this.loading = false;
                 });
         },
         loadMore() {
