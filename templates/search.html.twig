@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div id="search-results">
+                    <div class="mb-3">
+                        <input class="form-control" v-model="query" @input="search" placeholder="Enter your search query">
+                    </div>
+                    <ul class="list-group">
+                        <li v-for="result in results" :key="result.id" class="list-group-item">
+                            ${ result.name }
+                        </li>
+                    </ul>
+                    <button v-if="results.length && results.length % 5 === 0" @click="loadMore" class="btn btn-primary mt-3">Load More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsVueBlock %}
+    <script src="{{ asset('js/vue@2.js') }}"></script>
+    <script src="{{ asset('js/axios.min.js') }}"></script>
+    <script src="{{ asset('js/vue-components/SearchResults.js') }}"></script>
+{% endblock %}
