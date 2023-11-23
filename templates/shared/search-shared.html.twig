@@ -1,0 +1,22 @@
+<div id="search-component">
+    <div class="mb-3">
+        <input class="form-control border-3" v-model="query" @input="search" placeholder="Enter your search query in OpenSearch">
+    </div>
+    <ul class="list-group">
+        <li v-for="result in results" :key="result.id" class="list-group-item">
+            <h5 v-html="highlightText(result._source.name)"></h5>
+            <p>${ result._source.description }</p>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button v-if="results.length && results.length % 5 === 0" @click="loadMore" class="btn btn-outline-primary mt-3">Load More</button>
+        </div>
+    </div>
+</div>
+
+{% block jsVueBlock %}
+    <script src="{{ asset('js/vue@2.js') }}"></script>
+    <script src="{{ asset('js/axios.min.js') }}"></script>
+    <script src="{{ asset('js/vue-components/SearchComponent.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Page 1 | Vue.js App{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="badge bg-warning fs-4 mb-2">Page 1</div><br>
+                <div class="badge bg-success fs-5 mb-2">Search Component in Vue.js within Symfony</div>
+                {% include "shared/search-shared.html.twig" %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

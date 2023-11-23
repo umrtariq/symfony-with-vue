@@ -1,5 +1,5 @@
 new Vue({
-    el: '#search-results',
+    el: '#search-component',
     delimiters: ['${', '}'],
     data: {
         query: '',
@@ -43,6 +43,14 @@ new Vue({
             // Fetch additional results from Symfony controller endpoint
             this.fetchResults(this.query, true);
         },
+        highlightText(text) {
+            if (!this.query) {
+                return text;
+            }
+
+            const regex = new RegExp(`(${this.query})`, 'gi');
+            return text.replace(regex, '<span class="text-warning">$1</span>');
+        }
     },
     created() {
         // Initial search on component creation

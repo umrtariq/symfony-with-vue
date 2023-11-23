@@ -16,7 +16,7 @@ class OpenSearchClient
         $this->parameterBag = $parameterBag;
     }
 
-    public function search(string $query, int $page = 1, int $perPage = 5, int $fuzziness = 1, string $sortByField = 'name', string $sortOrder = 'asc'): array
+    public function search(string $query, int $page = 1, int $perPage = 5, int $fuzziness = 2): array
     {
         $index = "hackday-demo-123";
 
